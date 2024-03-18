@@ -36,6 +36,9 @@
         </dd>
     </dl>
 </div>
+<div class="row row-cols-md-12">
+    @await Html.PartialAsync("_DetFacturaVenta", Model.DetFacturaVenta)
+</div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

@@ -67,7 +67,7 @@ namespace HYCM17032024.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FechaVenta,Correlativo,Cliente,TotalVenta,DetFacturaVenta")] FacturaVenta facturaVenta)
         {
-            facturaVenta.TotalVenta = facturaVenta.DetFacturaVenta.Sum(s => s.Cantidad * s.PrecioUnitario);
+           facturaVenta.TotalVenta = facturaVenta.DetFacturaVenta.Sum( s => s.Cantidad* s.PrecioUnitario);
             _context.Add(facturaVenta);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
