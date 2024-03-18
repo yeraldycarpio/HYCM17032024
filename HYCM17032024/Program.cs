@@ -1,7 +1,13 @@
+using HYCM17032024.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<HYCM17032024Context>(options =>
+   options.UseSqlServer(builder.Configuration.GetConnectionString("cnn")));
 
 var app = builder.Build();
 
