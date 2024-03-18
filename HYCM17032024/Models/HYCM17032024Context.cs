@@ -38,9 +38,9 @@ namespace HYCM17032024.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.IdFactuVentaNavigation)
+                entity.HasOne(d => d.IdFacturaVentaNavigation)
                     .WithMany(p => p.DetFacturaVenta)
-                    .HasForeignKey(d => d.IdFactuVenta)
+                    .HasForeignKey(d => d.IdFacturaVenta)
                     .HasConstraintName("FK__DetFactur__IdFac__398D8EEE");
             });
 

@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+}
+@model IEnumerable<DetFacturaVenta>
+<input type="hidden" name="accion" value="@ViewBag.Accion" />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioUnitario)
+            </th>
+            <th>
+                @if (ViewBag.Accion == "Create" || ViewBag.Accion == "Edit")
+                {
+                    <button type="submit" class="btn btn-primary" formaction="@Url.Action("AgregarDetalles")">Agregar</button>
+                }
+
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @{
+            int index = -1;
+        }
+        @if (Model != null && Model.Count() > 0)
+        {
+            @foreach (var item in Model)
+            {
+                index++;
+                // var hidde = "table";
+                if (item.Id > -1)
+                {
+                    <tr>
+                        <td>
+                            <input type="hidden" value="@item.Id" name="DetFacturaVenta[@index].Id">
+                            <input type="hidden" value="@item.IdFacturaVenta" name="DetFacturaVenta[@index].IdFacturaVenta">
+                            <input class="form-control" data-readonly type="text" name="DetFacturaVenta[@index].Producto" value="@item.Producto">
+                        </td>
+                        <td>
+                            <input class="form-control" data-readonly type="number" name="DetFacturaVenta[@index].Cantidad" value="@item.Cantidad">
+                        </td>
+                        <td>
+                            <input class="form-control" data-readonly type="text" name="DetFacturaVenta[@index].PrecioUnitario" value="@item.PrecioUnitario">
+                        </td>
+                        <td>
+                            @if (ViewBag.Accion == "Create" || ViewBag.Accion == "Edit")
+                            {
+                                <button name="index" value="@index" class="btn btn-primary" type="submit" formaction="@Url.Action("EliminarDetalles")">Eliminar</button>
+                            }
+
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr style="display:none">
+                        <td>
+                            <input type="hidden" value="@item.Id" name="DetFacturaVenta[@index].Id">
+                            <input type="hidden" value="@item.IdFacturaVenta" name="DetFacturaVenta[@index].IdFacturaVenta">
+                            <input type="hidden" name="DetFacturaVenta[@index].Producto" value="@item.Producto">
+                            <input type="hidden" name="DetFacturaVenta[@index].Cantidad" value="@item.Cantidad">
+                            <input type="hidden" name="DetFacturaVenta[@index].PrecioUnitario" value="@item.PrecioUnitario">
+                        </td>
+                    </tr>
+                }
+            }
+        }
+
+    </tbody>
+</table>
+@if (ViewBag.Accion == "Details" || ViewBag.Accion == "Delete")
+{
+    <script>
+        const readOnly = document.querySelectorAll("*[data-readonly]");
+        for (var i = 0; i < readOnly.length; i++) {
+            const item = readOnly[i];
+            item.setAttribute("readonly", true);
+        }
+
+    </script>
+}
+}

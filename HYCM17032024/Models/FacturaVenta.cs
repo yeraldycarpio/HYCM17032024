@@ -7,7 +7,7 @@ namespace HYCM17032024.Models
     {
         public FacturaVenta()
         {
-            DetFacturaVenta = new HashSet<DetFacturaVenta>();
+            DetFacturaVenta = new List<DetFacturaVenta>();
         }
 
         public int Id { get; set; }
@@ -16,6 +16,6 @@ namespace HYCM17032024.Models
         public string Cliente { get; set; } = null!;
         public decimal TotalVenta { get; set; }
 
-        public virtual ICollection<DetFacturaVenta> DetFacturaVenta { get; set; }
+        public virtual IList<DetFacturaVenta> DetFacturaVenta { get; set; }
     }
 }
